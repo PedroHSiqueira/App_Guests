@@ -1,10 +1,13 @@
 package com.example.guests.repository
 
+import android.content.ContentValues
 import android.content.Context
+import com.example.guests.model.GuestModel
 
 class GuestRepository private constructor(context: Context) {
 
-    private  val guestDataBase  = GuestDataBase(context)
+    private val guestDataBase = GuestDataBase(context)
+
     companion object {
         private lateinit var repository: GuestRepository
 
@@ -16,10 +19,20 @@ class GuestRepository private constructor(context: Context) {
         }
     }
 
-    fun insert(){
+    //Inserindo dados no SQLite
+    fun insert(guest: GuestModel) {
+        val db = guestDataBase.writableDatabase
+
+        val presence = if (guest.presence) 1 else 0
+
+        val values = ContentValues()
+        values.put("name", guest.name)
+        values.put("presence", presence)
+
+        db.insert("Guest", null, values)
     }
 
-    fun update(){
+    fun update() {
 
     }
 }
