@@ -11,7 +11,9 @@ class GuestDataBase(context: Context) : SQLiteOpenHelper(context, NAME, null, VE
         private const val VERSION = 1
     }
 
+    //Criando o banco de dados SQLite
     override fun onCreate(db: SQLiteDatabase) {
+        //código SQL de criação de banco
         db.execSQL("CREATE TABLE Guest (id integer PRIMARY KEY AUTOINCREMENT, name text, precense integer);")
     }
 
