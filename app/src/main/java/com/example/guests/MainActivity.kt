@@ -25,8 +25,8 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.appBarMain.toolbar)
 
+        //Fazendo o Botão flutuante iniciar a activity
         binding.appBarMain.fab.setOnClickListener { view ->
-
             //Start na Activity GuestFormActivity
             startActivity(Intent(applicationContext, GuestFormActivity::class.java))
         }
