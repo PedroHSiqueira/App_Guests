@@ -1,6 +1,9 @@
 package com.example.guests.repository
 
+import android.content.ContentValues
 import android.content.Context
+import com.example.guests.model.GuestModel
+import java.lang.Exception
 
 class GuestRepository private constructor(context: Context) {
 
@@ -23,8 +26,26 @@ class GuestRepository private constructor(context: Context) {
         }
     }
 
-    fun get(){}
+    fun insert(guest: GuestModel): Boolean {
+        return try {
+            val db = guestDataBase.writableDatabase
 
-    fun update(){}
+            val presence = if (guest.presence) 1 else 2
+
+            //Carrega as informações para o banco
+            val values = ContentValues()
+            values.put("name", guest.name)
+            values.put("presence", presence)
+
+            // Inserindo Dados no banco de dados
+            db.insert("Guest", null, values)
+
+            true
+        } catch (e: Exception) {
+            false
+        }
+    }
+
+    fun update() {}
 
 }
